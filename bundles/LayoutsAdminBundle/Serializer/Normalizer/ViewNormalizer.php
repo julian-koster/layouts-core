@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\LayoutsAdminBundle\Serializer\Normalizer;
 
+use ArrayObject;
 use Netgen\Bundle\LayoutsAdminBundle\Serializer\Values\Value;
 use Netgen\Bundle\LayoutsAdminBundle\Serializer\Values\View;
 use Netgen\Layouts\View\RendererInterface;
@@ -29,7 +30,7 @@ final class ViewNormalizer implements NormalizerInterface, NormalizerAwareInterf
      *
      * @return array<string, mixed>
      */
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): ArrayObject|array|string|int|float|bool|null
     {
         /** @var array<string, mixed> $normalizedData */
         $normalizedData = $this->normalizer->normalize(
@@ -55,7 +56,7 @@ final class ViewNormalizer implements NormalizerInterface, NormalizerAwareInterf
      * @param mixed $data
      * @param string|null $format
      */
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof View;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\LayoutsAdminBundle\Serializer\Normalizer;
 
+use ArrayObject;
 use Netgen\Bundle\LayoutsAdminBundle\Serializer\Values\Value;
 use Netgen\Layouts\Parameters\Parameter;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -16,7 +17,7 @@ final class ParameterNormalizer implements NormalizerInterface
      *
      * @return mixed[]|string|int|float|bool|null
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize(mixed $object, ?string $format = null, array $context = []): ArrayObject|array|string|int|float|bool|null
     {
         /** @var \Netgen\Layouts\Parameters\Parameter $parameter */
         $parameter = $object->getValue();
@@ -29,7 +30,7 @@ final class ParameterNormalizer implements NormalizerInterface
      * @param mixed $data
      * @param string|null $format
      */
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         if (!$data instanceof Value) {
             return false;

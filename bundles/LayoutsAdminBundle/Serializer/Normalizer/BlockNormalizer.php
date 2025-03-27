@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\LayoutsAdminBundle\Serializer\Normalizer;
 
+use ArrayObject;
 use Generator;
 use Netgen\Bundle\LayoutsAdminBundle\Serializer\Values\Value;
 use Netgen\Layouts\API\Service\BlockService;
@@ -31,7 +32,7 @@ final class BlockNormalizer implements NormalizerInterface, NormalizerAwareInter
      *
      * @return array<string, mixed>
      */
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): ArrayObject|array|string|int|float|bool|null
     {
         /** @var \Netgen\Layouts\API\Values\Block\Block $block */
         $block = $object->getValue();
@@ -80,7 +81,7 @@ final class BlockNormalizer implements NormalizerInterface, NormalizerAwareInter
      * @param mixed $data
      * @param string|null $format
      */
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         if (!$data instanceof Value) {
             return false;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\LayoutsAdminBundle\Serializer\Normalizer;
 
+use ArrayObject;
 use Netgen\Bundle\LayoutsAdminBundle\Serializer\Values\Value;
 use Netgen\Layouts\API\Values\Collection\Slot;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -16,7 +17,7 @@ final class CollectionSlotNormalizer implements NormalizerInterface
      *
      * @return array<string, mixed>
      */
-    public function normalize($object, $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): ArrayObject|array|string|int|float|bool|null
     {
         /** @var \Netgen\Layouts\API\Values\Collection\Slot $slot */
         $slot = $object->getValue();
@@ -34,7 +35,7 @@ final class CollectionSlotNormalizer implements NormalizerInterface
      * @param mixed $data
      * @param string|null $format
      */
-    public function supportsNormalization($data, $format = null): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         if (!$data instanceof Value) {
             return false;
